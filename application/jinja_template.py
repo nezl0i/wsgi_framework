@@ -1,6 +1,6 @@
 from jinja2 import FileSystemLoader
 from jinja2.environment import Environment
-from krosha_framework.settings import TEMPLATE_DIR
+from application.settings import TEMPLATE_DIR
 
 
 def render(template_name, folder=TEMPLATE_DIR, **kwargs):

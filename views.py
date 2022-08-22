@@ -1,4 +1,4 @@
-from krosha_framework.jinja_template import render
+from application.jinja_template import render
 from patterns.patterns import Engine, Logger
 from datetime import date
 from patterns.struct import AppRoute, Debug

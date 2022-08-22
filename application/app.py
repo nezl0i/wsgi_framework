@@ -1,4 +1,4 @@
-from krosha_framework.frame import GetRequests, PostRequests
+from application.frame import GetRequests, PostRequests
 
 
 class PageNotFound404:

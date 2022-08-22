@@ -1,4 +1,4 @@
-# < krosha_framework > 
+# < wsgi_framework > 
 
 ## Run framework server
 

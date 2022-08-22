@@ -1,5 +1,5 @@
-from krosha_framework.app import Framework
-from krosha_framework.settings import CURRENT_HOST, CURRENT_PORT, BASE_DIR
+from application.app import Framework
+from application.settings import CURRENT_HOST, CURRENT_PORT, BASE_DIR
 from urls import fronts
 from views import routes
 from wsgiref.simple_server import make_server
