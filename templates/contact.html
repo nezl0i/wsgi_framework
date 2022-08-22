@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+    Обратная связь
+{% endblock %}
+{% block style %}
+    {% include 'style.html' %}
+{% endblock %}
+
+{% block content %}
+<h1>Обратная связь</h1>
+<form action="" method="post">
+    <fieldset>
+        <legend>Ваше обращение</legend>
+        <p><label class="title" for="email">Ваш email:</label>
+            <input type="text" name="email" id="email">
+            <label class="title">Тема:</label>
+            <input type="text" name="theme">
+            <span></span>
+            <label class="title">Сообщение</label>
+            <textarea name="comment"></textarea>
+        </p>
+        <p></p>
+    </fieldset>
+    <div class="submit"><input type="submit" value="Отправить"/></div>
+</form>
+{% endblock %}

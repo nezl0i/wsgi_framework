@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block style %}{% endblock %}
+</head>
+<body>
+{% block menu %}
+<nav class="top-menu">
+    <a class="navbar-logo" href=""><img src="https://html5book.ru/wp-content/uploads/2017/04/lily-logo.png"></a>
+    <ul class="menu-main">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/registration/">Регистрация</a></li>
+        <li><a href="/study_programs/">Программа</a></li>
+        <li><a href="/contact/">Contact</a></li>
+    </ul>
+</nav>
+{% endblock %}
+{% block content %} {% endblock %}
+</body>
+</html>
