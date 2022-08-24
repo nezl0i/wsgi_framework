@@ -1,23 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html style="font-size: 16px;" lang="ru">
 <head>
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
     {% block style %}{% endblock %}
+    <link rel="stylesheet" href="{{ static }}css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="{{ static }}css/index.css" media="screen">
+    <link rel="stylesheet" href="{{ static }}css/framework.css">
+<!--    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"-->
+<!--          crossorigin="anonymous"/>-->
+    <link rel="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"
+          type="text/css"/>
+    {% block jscript %}{% endblock %}
+    <script class="u-script" type="text/javascript" src="{{ static }}js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{{ static }}js/nicepage.js" defer=""></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 </head>
-<body>
-{% block menu %}
-<nav class="top-menu">
-    <a class="navbar-logo" href=""><img src="https://html5book.ru/wp-content/uploads/2017/04/lily-logo.png"></a>
-    <ul class="menu-main">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about/">About</a></li>
-        <li><a href="/registration/">Регистрация</a></li>
-        <li><a href="/study_programs/">Программа</a></li>
-        <li><a href="/contact/">Contact</a></li>
-    </ul>
-</nav>
+
+<body data-home-page="index.html" data-home-page-title="Главная" class="u-body u-xl-mode" data-lang="ru">
+{% block header %}
+<header class="u-clearfix u-header u-header" id="sec-8ea2">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <a href="https://127.0.0.1:8005" class="u-image u-logo u-image-1">
+            <img src="{{ static }}images/default-logo.png" class="u-logo-image u-logo-image-1">
+        </a>
+        {% block menu %}
+        <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
+
+            <div class="u-nav-container">
+                <ul class="u-nav u-unstyled u-nav-1">
+                    <li class="u-nav-item">
+                        <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                           href="/" style="padding: 10px 20px;">Главная</a>
+                    </li>
+                    <li class="u-nav-item">
+                        <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                           href="/shedule/" style="padding: 10px 20px;">Расписание</a>
+                    </li>
+                    <li class="u-nav-item">
+                        <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                           href="/courses-list/" style="padding: 10px 20px;">Курсы</a>
+                    </li>
+                    <li class="u-nav-item">
+                        <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                           href="/category-list/" style="padding: 10px 20px;">Категории</a>
+                    </li>
+                    <li class="u-nav-item">
+                        <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                           href="/teacher-list/" style="padding: 10px 20px;">Учителя</a>
+                    </li>
+                    <li class="u-nav-item">
+                        <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                           href="/student-list/" style="padding: 10px 20px;">Ученики</a>
+                    </li>
+                    <li class="u-nav-item">
+                        <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                           href="/about/" style="padding: 10px 20px;">О нас</a>
+                    </li>
+                    <li class="u-nav-item">
+                        <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                           href="/contact/" style="padding: 10px 20px;">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        {% endblock %}
+    </div>
+</header>
 {% endblock %}
 {% block content %} {% endblock %}
+{% block footer %}
+<div class="container">
+    <footer class="u-align-center u-clearfix u-footer  u-footer" id="sec-09fb">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <p class="u-small-text u-text u-text-variant u-text-1">Политика конфиденциальности Оферта Сведения об
+                образовательной организации</p>
+        </div>
+    </footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+        <a class="u-link" href="http://gb.ru" target="_blank">
+            <span>Geekbrains</span>
+        </a>
+        <p class="u-text">
+            <span>created </span>
+        </p>
+        <a class="u-link" href="" target="_blank">
+            <span>Федорычев Вячеслав</span>
+        </a>
+    </section>
+</div>
+
+{% endblock %}
 </body>
 </html>

@@ -1,24 +1,118 @@
 {% extends "base.html" %}
 {% block title %}
-Список курсов
+Список категорий
 {% endblock %}
 {% block style %}
-    {% include 'style.html' %}
+<link rel="stylesheet" href="{{ static }}css/framework.css">
+<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+      crossorigin="anonymous"/>
+<link rel="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"
+      type="text/css"/>
 {% endblock %}
+{% block jscript %}
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+{% endblock %}
+
 {% block content %}
-    <a href="/">назад</a>
+<section class="u-clearfix u-valign-middle-lg u-valign-middle-xl u-section-1" id="carousel_0c1c">
+    <div id="">
 
-    <h1>Список категорий</h1>
-    <ul>
-        {% for item in objects_list %}
-        <li>
-            {{item.name}} <span>Количество курсов: {{item.course_count()}}</span>
-        </li>
-        {% endfor %}
-    </ul>
+        <div class="container">
+            <h1 class="mt-4">Категории</h1>
 
-	<div>
-		<li><a href="/courses-list/">Список курсов</a></li>
-		<li><a href="/create-course/">Создать курс</a></li>
-	</div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="Category_create" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Создать категорию</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-primary">Создать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Список Категорий
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Ид</th>
+                                <th>Наименование</th>
+                                <th>Курс</th>
+                                <th>Преподаватели</th>
+                                <th>Скопировать</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for category in objects_list %}
+                            <tr>
+                                <td>{{ category.id }}</td>
+                                <td>{{ category.name }}</td>
+                                <!--                                    <td>{{ category.course_count() }}</td>-->
+                                <td>
+                                    {% for item in course_list %}
+                                        {{ item.name }}
+                                    {% endfor %}
+
+                                </td>
+                                <td>{{ category.teachers }}</td>
+                                <td>
+                                    <form action="" method="post">
+                                        <!--                                            <a href="/copy-course/?name={{category.name}}" class="btn btn-danger btn-block" >Скопировать</a></span>-->
+                                        <input class="btn btn-danger btn-block" type="submit" value="Скопировать">
+                                    </form>
+                                </td>
+
+                                <td>
+                                    <form action="">
+                                        <input class="btn btn-success btn-block" type="submit" value="Изменить">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="#" method="post">
+                                        <input class="btn btn-danger btn-block" type="submit" value="Удалить">
+                                    </form>
+                                </td>
+                                {% if category.id >= 0 %}
+                                <td>
+                                    <a href="/create-course/?id={{category.id}}" class="btn btn-primary">Создать новый
+                                        курс</a>
+                                </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="/create-category/" class="btn btn-success">Добавить категорию</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
+
+

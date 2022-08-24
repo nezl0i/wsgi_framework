@@ -1,14 +1,26 @@
 {% extends "base.html" %}
 {% block title %}
-Создание курса
+Создание категории
 {% endblock %}
-{% block style %}
-    {% include 'style.html' %}
-{% endblock %}
+
 {% block content %}
-<h1>Создание категории</h1>
-<form method="post">
-    <input type="text" name="name" placeholder="Название">
-    <button type="submit">Сохранить и вернуться на главную</button>
-</form>
+<section class="u-clearfix u-valign-middle-lg u-valign-middle-xl u-section-1" id="carousel_0c1c">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h3>Создание категории</h3>
+                <form method="post">
+                    <div class="form-group">
+                        <label>Наименование</label>
+                        <input type="text" name="name" class="form-control" placeholder="name">
+                    </div>
+                    <button type="submit" class="btn btn-info">Сохранить</button>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

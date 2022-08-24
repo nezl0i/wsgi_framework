@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}
+Расписание
+{% endblock %}
+
+{% block content %}
+<section class="u-clearfix u-valign-middle-lg u-valign-middle-xl u-section-1" id="carousel_0c1c">
+    <div id="">
+            <div class="container">
+                <h1 class="mt-4">Расписание</h1>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table mr-1"></i>
+                        Расписание курсов
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Наименование</th>
+                                    <th>Дата начало</th>
+                                    <th>Дата окончания</th>
+                                    <th>Преподаватель</th>
+                                    <th>Изменить</th>
+                                    <th>Удалить</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in objects_list %}
+                                <tr>
+                                    <td>{{ item.caption }}</td>
+                                    <td>{{ item.start_date }}</td>
+                                    <td>{{ item.end_date }}</td>
+                                    <td>{{ item.teacher }}</td>
+                                    <td>
+                                        <form action="#" method="post">
+                                            <input class="btn btn-danger btn-block" type="submit" value="Удалить">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="">
+                                            <input class="btn btn-success btn-block" type="submit" value="Изменить">
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="">
+                            <button class="btn btn-success">Добавить расписание</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
+
+{% endblock %}
+
+

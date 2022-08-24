@@ -1,4 +1,9 @@
+from os import path
+from application.content import TYPES
 from application.frame import GetRequests, PostRequests
+from patterns.patterns import Logger
+
+logger = Logger('app')
 
 
 class PageNotFound404:
@@ -8,16 +13,16 @@ class PageNotFound404:
 
 class Framework:
 
-    def __init__(self, routes, fronts):
+    def __init__(self, settings, routes):
         self.routes = routes
-        self.fronts = fronts
+        self.settings = settings
 
     def __call__(self, environ, start_response):
 
-        path = environ['PATH_INFO']
+        path_info = environ['PATH_INFO']
 
-        if not path.endswith('/'):
-            path = f'{path}/'
+        if not path_info.endswith('/'):
+            path_info = f'{path_info}/'
 
         request = {}
 
@@ -29,29 +34,56 @@ class Framework:
             request['data'] = data
 
             print(f'POST requests: {data}')
+            if data.get('method'):
+                method_new = data['method']
+                if method_new != '':
+                    request['method'] = data['method']
 
-            if path == '/contact/':
-                email = data.get('email', None)
-                theme = data.get('theme', None)
-                message = data.get('comment', None)
+            if path_info == '/contact/':
+                name = data.get('name')
+                phone = data.get('phone')
+                email = data.get('email')
+                topic = data.get('topic')
+                message = data.get('message')
                 with open('message.txt', 'w', encoding='utf-8') as file:
-                    file.write(f'Email: {email}\nTheme: {theme}\nMessage: {message}')
+                    file.write(f'Name: {name}\nEmail: {email}\nPhone: {phone}\nTopic: {topic}\nMessage: {message}')
 
         if method == 'GET':
             request_params = GetRequests().get(environ)
             request['request_params'] = request_params
 
-        if path in self.routes:
-            view = self.routes[path]
+        if path_info in self.routes:
+            view = self.routes[path_info]
+            content_type = self.get_content_type(path_info)
+            code, body = view(request)
+            body = body.encode('utf-8')
+        elif path_info.startswith(self.settings.STATIC_URL):
+            file_path = path_info[len(self.settings.STATIC_URL):len(path_info) - 1]
+            content_type = self.get_content_type(file_path)
+            code, body = self.get_static(self.settings.STATIC_FILES_DIR,
+                                         file_path)
         else:
             view = PageNotFound404()
+            content_type = self.get_content_type(path_info)
+            code, body = view(request)
+            body = body.encode('utf-8')
 
-        for front in self.fronts:
-            front(request)
+        start_response(code, [('Content-Type', content_type)])
+        return [body]
 
-        code, body = view(request)
-        start_response(code, [('Content-Type', 'text/html')])
-        return [body.encode('utf-8')]
+    @staticmethod
+    def get_content_type(file_path, content_types_map=TYPES):
+        file_name = path.basename(file_path).lower()
+        extension = path.splitext(file_name)[1]
+        return content_types_map.get(extension, "text/html")
+
+    @staticmethod
+    def get_static(static_dir, file_path):
+        path_to_file = path.join(static_dir, file_path)
+        with open(path_to_file, 'rb') as f:
+            file_content = f.read()
+        status_code = '200 OK'
+        return status_code, file_content
 
 
 class DebugApp(Framework):

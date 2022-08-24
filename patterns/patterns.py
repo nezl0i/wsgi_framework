@@ -1,4 +1,5 @@
 import copy
+import json
 
 
 class User:
@@ -80,6 +81,7 @@ class Engine:
         self.students = []
         self.courses = []
         self.categories = []
+        self.shedules = json.load(open('fixtures/content.json', encoding='utf-8'))
 
     @staticmethod
     def create_user(type_):

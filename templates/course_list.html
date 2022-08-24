@@ -2,25 +2,71 @@
 {% block title %}
 Список курсов
 {% endblock %}
-{% block style %}
-    {% include 'style.html' %}
-{% endblock %}
+
+
 {% block content %}
-    <div>
-        <a href="/">назад на главную</a>
-    </div>
+<section class="u-clearfix u-valign-middle-lg u-valign-middle-xl u-section-1" id="carousel_0c1c">
+    <div id="">
+        <div class="container">
+            <h1 class="mt-4">Курсы</h1>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Список курсов
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Ид</th>
+                                <th>Наименование</th>
+                                <th>Категория</th>
+                                <th>Скопировать</th>
+                                <th>Изменить</th>
+                                <th>Удалить</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for course in objects_list %}
+                            <tr>
+                                <td>{{ course.id }}</td>
+                                <td>{{ course.name }}</td>
+                                <td>
+                                </td>
+                                <td>
+                                    <form action="" method="post">
+                                        <input class="btn btn-danger btn-block" type="submit" value="Скопировать">
+                                    </form>
+                                </td>
 
-    <br>
-    <br>
+                                <td>
+                                    <form action="">
+                                        <input class="btn btn-success btn-block" type="submit" value="Изменить">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/course-list/" method="post">
+                                        <input type="hidden" name="method" value="delete">
+                                        <input type="hidden" name="id" value="{{ course.id }}">
+                                        <input class="btn btn-danger btn-block" type="submit" value="Удалить">
+                                    </form>
 
-    <div>
-        <a href="/create-course/?id={{id}}">Создать новый курс</a>
-        <br>
-        <h1>Список курсов для категории "{{name}}"</h1>
-        {% for item in objects_list %}
-        <li>
-            {{item.name}} <span><a href="/copy-course/?name={{item.name}}">скопировать</a></span>
-        </li>
-        {% endfor %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+<!--                <div class="card-footer">-->
+<!--                    <a href="/create-course/?id={{id}}" class="btn btn-primary">Создать новый курс</a>-->
+<!--                </div>-->
+            </div>
+        </div>
     </div>
+</section>
+
 {% endblock %}
+
+

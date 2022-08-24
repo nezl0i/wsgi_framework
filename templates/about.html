@@ -2,10 +2,21 @@
 {% block title %}
 О нас
 {% endblock %}
-{% block style %}
-    {% include 'style.html' %}
-{% endblock %}
 {% block content %}
-	Тут что-то будет
+{% block style %}
+    <link rel="stylesheet" href="{{ static }}css/about.css" media="screen">
+{% endblock %}
+
+    <div class="container">
+        <figure class="fig">
+        <img src="{{ static }}images/about.png" class="img-centered">
+         <figcaption>
+             IT Online Course
+            Международный образовательный проект, который готовит специалистов-практиков IТ-сферы
+         </figcaption>
+        </figure>
+    </div>
+
+
 {% endblock %}
 

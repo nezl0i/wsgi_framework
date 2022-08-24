@@ -2,23 +2,25 @@
 {% block title %}
 Создание курса
 {% endblock %}
-{% block style %}
-    {% include 'style.html' %}
-{% endblock %}
 
 {% block content %}
-    <div>
-        <a href="/courses-list/?id={{id}}">назад</a>
+<section class="u-clearfix u-valign-middle-lg u-valign-middle-xl u-section-1" id="carousel_0c1c">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h3>Создание курса</h3>
+                <form method="post">
+                    <div class="form-group">
+                        <label>Наименование</label>
+                        <input type="text" name="name" class="form-control" placeholder="name">
+                    </div>
+                    <button type="submit" class="btn btn-info">Сохранить</button>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
     </div>
+</section>
 
-    <br>
-    <br>
-
-    <div>
-        <h1>Создание курса для категории "{{name}}"</h1>
-        <form method="post">
-            <input type="text" name="name" placeholder="Название">
-            <button type="submit">Сохранить и вернуться к списку курсов</button>
-        </form>
-    </div>
 {% endblock %}

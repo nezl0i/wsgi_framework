@@ -2,6 +2,8 @@ from application.jinja_template import render
 from patterns.patterns import Engine, Logger
 from datetime import date
 from patterns.struct import AppRoute, Debug
+import json
+
 
 site = Engine()
 logger = Logger('main')
@@ -13,6 +15,13 @@ class Index:
     @Debug(name='Index')
     def __call__(self, request):
         return '200 OK', render('index.html', objects_list=site.categories)
+
+
+@AppRoute(routes=routes, url='/shedule/')
+class Index:
+    @Debug(name='Shedule')
+    def __call__(self, request):
+        return '200 OK', render('shedule.html', objects_list=site.shedules)
 
 
 @AppRoute(routes=routes, url='/about/')
@@ -55,12 +64,17 @@ class CoursesList:
     @Debug(name='CoursesList')
     def __call__(self, request):
         logger.log('Список курсов')
-        try:
-            category = site.find_category_by_id(int(request['request_params']['id']))
-            return '200 OK', render('course_list.html', objects_list=category.courses,
-                                    name=category.name, id=category.id)
-        except KeyError:
-            return '200 OK', 'No courses have been added yet'
+        # request_params = request['request_params']
+        # if request_params:
+        #     category = site.find_category_by_id(int(request['request_params']['id']))
+        #
+        #     return '200 OK', render('course_list.html', objects_list=site.courses,
+        #                             name=category.name, id=category.id)
+        # else:
+        #     return '200 OK', render('course_list.html')
+
+        print(site.courses)
+        return '200 OK', render('course_list.html', objects_list=site.courses)
 
 
 @AppRoute(routes=routes, url='/create-course/')
@@ -71,10 +85,9 @@ class CreateCourse:
     def __call__(self, request):
         if request['method'] == 'POST':
             data = request['data']
-
             name = data['name']
-
             category = None
+
             if self.category_id != -1:
                 category = site.find_category_by_id(int(self.category_id))
 
@@ -111,8 +124,7 @@ class CreateCategory:
 
             new_category = site.create_category(name, category)
             site.categories.append(new_category)
-
-            return '200 OK', render('index.html', objects_list=site.categories)
+            return '200 OK', render('category_list.html', objects_list=site.categories)
         else:
             categories = site.categories
             return '200 OK', render('create_category.html', categories=categories)
@@ -123,7 +135,7 @@ class CategoryList:
     @Debug(name='CategoryList')
     def __call__(self, request):
         logger.log('Список категорий')
-        return '200 OK', render('category_list.html', objects_list=site.categories)
+        return '200 OK', render('category_list.html', objects_list=site.categories, course_list=site.courses)
 
 
 @AppRoute(routes=routes, url='/copy-course/')

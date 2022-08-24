@@ -9,7 +9,7 @@ class ParseData:
         if data:
             for item in data.split('&'):
                 k, v = item.split('=')
-                result[k] = v
+                result[k] = v.replace("+", " ")
         return result
 
 
